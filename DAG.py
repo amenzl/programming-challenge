@@ -23,22 +23,20 @@ class DAG(object):
             #Determine node order for current node
             node_order=node_order_list[i]
             #Determine maximum number of dependent nodes for this node
-            max_dep_node=number_nodes-node_order
+            max_dep_node=number_nodes-(node_order+1)
             #Add node 
             self.add_node(node_order)
             #Randomly determine how many dependent nodes current node will have
             num_dep_nodes=r.randint(0, max_dep_node)
             ##Subset node_order such that only nodes with higher order can be dependent nodes
-            dep_node_pot=range(node_order+1, self.total_nodes+1)
-            ## Randomly pick dependent nodes from list of potential dep nodes
-            if num_dep_nodes>0:
-                dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
-                #Add dependent nodes to list of dep of node object
-                for j in range(num_dep_nodes):
-                    self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
-            else:
-                self.node_dict[node_order].dep_node=[]
             
+
+            dep_node_pot=list(range(node_order+1, self.total_nodes))
+            ## Randomly pick dependent nodes from list of potential dep nodes
+            print('number of potential nodes: %i' % len(dep_node_pot))
+            print('number of dependent nodes: %i' % num_dep_nodes)
+            assert (len(dep_node_pot) >= num_dep_nodes)
+            dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
             
 
         assert (len(self.node_dict) == self.total_nodes) #check all nodes created
