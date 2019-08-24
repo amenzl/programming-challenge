@@ -15,10 +15,11 @@ class DAG(object):
         self.node_dict = {} #create member list of all node objects
         
         #Create a list with a randomly generated order number for nodes
-        node_order_list=r.sample(range(number_nodes), number_edges)
+        node_order_list=r.sample(range(number_nodes), number_nodes)
 
-
+        assert (number_edges >= number_nodes-1) #check all nodes created
         #create nodes
+        actual_edges=0
         for i in range(self.total_nodes):
             #Determine node order for current node
             node_order=node_order_list[i]
@@ -27,27 +28,38 @@ class DAG(object):
             #Add node 
             self.add_node(node_order)
             #Randomly determine how many dependent nodes current node will have
-            num_dep_nodes=r.randint(0, max_dep_node)
-            ##Subset node_order such that only nodes with higher order can be dependent nodes
+            if node_order<number_nodes-1:
+                num_dep_nodes=r.randint(1, max_dep_node)
+            else: 
+                num_dep_nodes=0
             
 
             dep_node_pot=list(range(node_order+1, self.total_nodes))
+            
             ## Randomly pick dependent nodes from list of potential dep nodes
             print('name of node: %i' %node_order)
             print('number of potential nodes: %i' % len(dep_node_pot))
             print('number of dependent nodes: %i' % num_dep_nodes)
             assert (len(dep_node_pot) >= num_dep_nodes)
             dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
+            actual_edges+=num_dep_nodes
+            print('Number of edges %i' %actual_edges)
             ## Randomly pick dependent nodes from list of potential dep nodes
             if num_dep_nodes>0:
                 dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
                 #Add dependent nodes to list of dep of node object
                 for j in range(num_dep_nodes):
                     self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
+                    
             else:
                 self.node_dict[node_order].dep_node=[]
 
         assert (len(self.node_dict) == self.total_nodes) #check all nodes created
+        
+        if number_edges>=actual_edges:
+            add a dependent
+            else if number_edge<= actual_edges:
+                remove a dependent
             
         #create edges
 #        for j in range(self.total_edges):
@@ -81,7 +93,7 @@ class node(object):
     def __init__(self, name):
         self.name = name
         self.dep_node = []
-#        self.neighbor_downstream = None
+        self.parent=0
 
     def set_dep_nodes(self, dep_name):
         self.dep_node.append(dep_name)
@@ -89,8 +101,9 @@ class node(object):
     def set_neighbor_downstream(self, neighbor_name):
         self.neighbor_downstream = neighbor_name
 
-nodes = 20
-edges = 20
+nodes = 5
+edges = 5
+
 
 g = DAG(nodes, edges)
 g.print_dep_nodes()
