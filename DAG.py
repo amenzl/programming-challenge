@@ -47,7 +47,7 @@ class DAG(object):
     def add_node(self, name):
         self.node_dict.update({name:node(name)})
     
-    def print_dep_nodes(self, ):
+    def print_dep_nodes(self):
         #ITerat over node dictionary
         for key in self.node_dict.keys():
             print(key)
@@ -76,3 +76,8 @@ class node(object):
     def set_neighbor_downstream(self, neighbor_name):
         self.neighbor_downstream = neighbor_name
 
+nodes = 20
+edges = 20
+
+g = DAG(nodes, edges)
+g.print_dep_nodes()
