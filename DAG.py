@@ -33,6 +33,7 @@ class DAG(object):
             ## Randomly pick dependent nodes from list of potential dep nodes
             print('number of potential nodes: %i' % len(dep_node_pot))
             print('number of dependent nodes: %i' % num_dep_nodes)
+            assert (len(dep_node_pot) >= num_dep_nodes)
             dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
             
             #Add dependent nodes to list of dep of node object
