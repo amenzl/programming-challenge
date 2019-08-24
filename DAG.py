@@ -14,24 +14,30 @@ class DAG(object):
         self.total_edges = number_edges #create member variable to hold number of edges
         self.node_dict = {} #create member list of all node objects
         
-        
+        #Create a list with a randomly generated order number for nodes
         node_order_list=r.sample(range(number_nodes), number_edges)
-        #Create dictionary of nodes with their order number
-        dict(zip(total_nodes), node_order_list))
+
 
         #create nodes
         for i in range(self.total_nodes):
-            
+            #Determine node order for current node
             node_order=node_order_list[i]
+            #Determine maximum number of dependent nodes for this node
             max_dep_node=number_nodes-node_order
+            #Add node 
+            self.add_node(node_order)
+            #Randomly determine how many dependent nodes current node will have
             num_dep_nodes=r.randint(range(max_dep_node),1)
             ##Subset node_order such that only nodes with higher order can be dependent nodes
+            dep_node_pot=range(node_order+1, self.total_nodes)
+            ## Randomly pick dependent nodes from list of potential dep nodes
+            dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
+            
+            #Add dependent nodes to list of dep of node object
             for j in range(num_dep_nodes):
-                ##pick specified number of nodes with an order number higher than itself
-                ## Add these nodes as list to node_dict for that node
-            self.add_node(i) #here add node with its dependent nodes
+                self.node_dict['name'][i].set_dep_nodes(dep_nodes[j])
 
-        assert (node_dict.len() == self.total_nodes) #check all nodes created
+        assert (self.node_dict.len() == self.total_nodes) #check all nodes created
             
         #create edges
         for j in range(self.total_edges):
@@ -39,7 +45,7 @@ class DAG(object):
             self.add_edge()
     
     def add_node(self, name):
-        add_node.append(node(name))
+        self.node_dict.update({name:node(name)})
     
     
     def add_edge(self, node_one, node_two):
@@ -52,11 +58,11 @@ class node(object):
     
     def __init__(self, name):
         self.name = name
-        self.neighbor_upstream = None
-        self.neighbor_downstream = None
+        self.dep_node = []
+#        self.neighbor_downstream = None
 
-    def set_neighbor_upstream(self, neighbor_name):
-        self.neighbor_upstream = neighbor_name
+    def set_dep_nodes(self, dep_name):
+        self.dep_node.append(dep_name)
 
     def set_neighbor_downstream(self, neighbor_name):
         self.neighbor_downstream = neighbor_name
