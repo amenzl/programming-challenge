@@ -8,7 +8,7 @@ Created on Sat Aug 24 07:38:37 2019
 
 #import networkx as nx
 #networkx creates graphs, functions include Graph(), add_nodes, add_edges
-#new comment
+
 class DAG(nodes, edges):
 
     def __init__(self, initial_nodes):
