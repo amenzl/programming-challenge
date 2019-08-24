@@ -35,23 +35,32 @@ class DAG(object):
             
             #Add dependent nodes to list of dep of node object
             for j in range(num_dep_nodes):
-                self.node_dict['name'][i].set_dep_nodes(dep_nodes[j])
+                self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
 
         assert (self.node_dict.len() == self.total_nodes) #check all nodes created
             
         #create edges
-        for j in range(self.total_edges):
+#        for j in range(self.total_edges):
             #TODO: need to ensure this is done acyclically; clever ordering/topology needed
-            self.add_edge()
+#            self.add_edge()
     
     def add_node(self, name):
         self.node_dict.update({name:node(name)})
     
+    def print_dep_nodes(self, ):
+        #ITerat over node dictionary
+        for key in self.node_dict.keys():
+            print(key)
+            for dep in self.node_dict.keys()[key].dep_node:
+                print(self.node_dict.keys()[key].dep_node[dep])
+#        print(node)
+        #get dependent nodes and print them
     
-    def add_edge(self, node_one, node_two):
-    #TODO:
-        node_one.set_neighbor_upstream(node_two.name)
-        node_two.set_neighbor_downstream(node_one.name)
+    
+#    def add_edge(self, node_one, node_two):
+#    #TODO:
+#        node_one.set_neighbor_upstream(node_two.name)
+#        node_two.set_neighbor_downstream(node_one.name)
 
 
 class node(object):
