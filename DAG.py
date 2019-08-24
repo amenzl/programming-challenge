@@ -11,13 +11,13 @@ class DAG(object):
     def __init__(self, number_nodes, number_edges):
         self.total_nodes = number_nodes #create member variable to hold number of nodes
         self.total_edges = number_edges #create member variable to hold number of edges
-        self.node_dict = {} #create member list of all node objects
+        self.node_dict = {} #create member dict of all node objects
         
         #create nodes
         for i in range(self.total_nodes):
             self.add_node(i)
 
-        assert (node_list.len() == self.total_nodes) #check all nodes created
+        assert (node_dict.len() == self.total_nodes) #check all nodes created
             
         #create edges
         for j in range(self.total_edges):
