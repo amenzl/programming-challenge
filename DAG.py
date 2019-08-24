@@ -6,29 +6,26 @@ Created on Sat Aug 24 07:38:37 2019
 @author: anna
 """
 
-import networkx as nx
+#import networkx as nx
 #networkx creates graphs, functions include Graph(), add_nodes, add_edges
-G=nx.Graph()
 
 class DAG(nodes, edges):
 
-    def __init__(self):
-        self.nx.Graph()
+    def __init__(self, initial_nodes):
+        self.total_nodes = initial_nodes
     
     def add_node(nodes):
-        for i in nodes:
-            nx.add_node(i)
+
     
     def add_edges(edges):
-        for i in edges:
-            nx.add_egdes
-            
 
-##Note sure yet what to put here
+
 class node(name, number, neighbor1, neighbor2):
     
     def __init__(self):
-        
+        self.neighbor_one = None
+        self.neighbor_two = None
+
 class edges()
 
 ##To draw the graph
