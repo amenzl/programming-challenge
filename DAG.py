@@ -33,11 +33,19 @@ class DAG(object):
 
             dep_node_pot=list(range(node_order+1, self.total_nodes))
             ## Randomly pick dependent nodes from list of potential dep nodes
+            print('name of node: %i' %node_order)
             print('number of potential nodes: %i' % len(dep_node_pot))
             print('number of dependent nodes: %i' % num_dep_nodes)
             assert (len(dep_node_pot) >= num_dep_nodes)
             dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
-            
+            ## Randomly pick dependent nodes from list of potential dep nodes
+            if num_dep_nodes>0:
+                dep_nodes=r.sample(dep_node_pot, num_dep_nodes)
+                #Add dependent nodes to list of dep of node object
+                for j in range(num_dep_nodes):
+                    self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
+            else:
+                self.node_dict[node_order].dep_node=[]
 
         assert (len(self.node_dict) == self.total_nodes) #check all nodes created
             
@@ -52,9 +60,12 @@ class DAG(object):
     def print_dep_nodes(self):
         #ITerat over node dictionary
         for key in self.node_dict.keys():
-            print(key)
-            for dep in self.node_dict.keys()[key].dep_node:
-                print(self.node_dict.keys()[key].dep_node[dep])
+            print('Name of node: %i' %key)
+            if len(self.node_dict[key].dep_node)>0:
+                for dep in range(len(self.node_dict[key].dep_node)):
+                    print('Dependent nodes:%i' %self.node_dict[key].dep_node[dep])
+            else: 
+                print("No dependent nodes")
 #        print(node)
         #get dependent nodes and print them
     
