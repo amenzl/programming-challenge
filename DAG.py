@@ -56,9 +56,9 @@ class DAG(object):
 
         assert (len(self.node_dict) == self.total_nodes) #check all nodes created
         
-        if number_edges>=actual_edges:
+        while number_edges>actual_edges:
             add a dependent
-            else if number_edge<= actual_edges:
+        if number_edge<= actual_edges:
                 remove a dependent
             
         #create edges
