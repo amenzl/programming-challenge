@@ -25,7 +25,12 @@ class DAG(nodes, edges):
             
 
 ##Note sure yet what to put here
-class node(name, number):
+class node(name, number, neighbor1, neighbor2):
     
     def __init__(self):
+        
+class edges()
+
+##To draw the graph
+nx.draw(G)
         
