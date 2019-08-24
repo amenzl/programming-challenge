@@ -11,7 +11,7 @@ class DAG(object):
     def __init__(self, number_nodes, number_edges):
         self.total_nodes = number_nodes #create member variable to hold number of nodes
         self.total_edges = number_edges #create member variable to hold number of edges
-        self.node_list =[] #create member list of all node objects
+        self.node_dict = {} #create member list of all node objects
         
         #create nodes
         for i in range(self.total_nodes):
@@ -25,7 +25,7 @@ class DAG(object):
             self.add_edge()
     
     def add_node(self, name):
-        add_node.append(node(name))
+        self.node_dict.update( {name : node(name)} )
     
     def add_edge(self, node_one, node_two):
     #TODO:
