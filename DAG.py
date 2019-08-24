@@ -23,7 +23,7 @@ class DAG(object):
             #Determine node order for current node
             node_order=node_order_list[i]
             #Determine maximum number of dependent nodes for this node
-            max_dep_node=number_nodes-node_order
+            max_dep_node=number_nodes-(node_order+1)
             #Add node 
             self.add_node(node_order)
             #Randomly determine how many dependent nodes current node will have
