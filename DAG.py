@@ -72,12 +72,21 @@ class DAG(object):
                     print("open nodes %i" %key)
                     open_nodes.append(key)
 #                    print(open_nodes)
-                    actual_edges+=1
+                    
                      # Pick a random entry from that list
             sel_node = r.randint(0, len(open_nodes)-1)
             dep_node_pot = list(range(sel_node+1, self.total_nodes))
-            dep_node_pot_new=np.setdiff1d(dep_node_pot,self.node_dict[key].dep_node)
+            print("here is the list of potential nodes")
+            print(dep_node_pot)
+            dep_node_pot_new=list(set(dep_node_pot) - set(self.node_dict[key].dep_node))
+            print("here is the list of new potential nodes")
             print(dep_node_pot_new)
+            dep_nodes_new = r.sample(dep_node_pot_new, 1)
+            self.node_dict[key].set_dep_nodes(dep_nodes_new[0])
+            actual_edges+=1
+#            dep_node_pot_new=np.setdiff1d(np.asarray(dep_node_pot),np.asarray(self.node_dict[key].dep_node))
+            print("here is the new node")
+            print(dep_nodes_new)
 #            print("open nodes %i" %open_nodes[sel_node])
                     
             
