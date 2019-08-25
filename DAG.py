@@ -154,12 +154,11 @@ class DAG(object):
             return good_path
         else:
             if len(self.node_dict[start_node].dep_node) == 0:
-                print("Dead end")
                 return None
             else:
                 for i in self.node_dict[start_node].dep_node:
-                    good_path.append(self.find_path(i, stop_node))
-                    good_path.append(start_node)
+                    good_path.insert(0, self.find_path(i, stop_node))
+                    good_path.insert(0, start_node)
                     return good_path
 
 
