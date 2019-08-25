@@ -148,18 +148,19 @@ class DAG(object):
                 print("  No parents")
 
     def find_path(self, start_node, stop_node):
-        good_path = []
-        if start_node == stop_node:
-            good_path.append(start_node)
-            return good_path
-        else:
-            if len(self.node_dict[start_node].dep_node) == 0:
-                return None
+        while True:
+            good_path = []
+            if start_node == stop_node:
+                good_path.append(start_node)
+                return good_path
             else:
-                for i in self.node_dict[start_node].dep_node:
-                    good_path.insert(0, self.find_path(i, stop_node))
-                    good_path.insert(0, start_node)
-                    return good_path
+                if len(self.node_dict[start_node].dep_node) == 0:
+                    raise Exception("no path found")
+                else:
+                    for i in self.node_dict[start_node].dep_node:
+                        good_path.insert(0, self.find_path(i, stop_node))
+                        good_path.insert(0, start_node)
+                        return good_path
 
 
 class node(object):
