@@ -53,8 +53,9 @@ class DAG(object):
                 #Add dependent nodes to list of dep of node object
                 for j in range(num_dep_nodes):
                     self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
-                    print('Number of edges %i' %actual_edges)
                 actual_edges += num_dep_nodes
+                print('Number of edges %i' %actual_edges)
+                
                     
             else:
                 self.node_dict[node_order].dep_node=[]
@@ -67,10 +68,13 @@ class DAG(object):
                 #check which nodes have less dependents than potential dependents
                 if len(self.node_dict[key].dep_node) < number_nodes-(key+1):
                     #Add all those nodes to a list
+                    print("open nodes %i" %key)
                     open_nodes.append(key)
+                    print(open_nodes)
+                    actual_edges+=1
                      # Pick a random entry from that list
-            sel_node = r.randint(1, len(open_nodes)+1)
-            print("open nodes %i" %open_nodes[sel_node])
+#            sel_node = r.randint(0, len(open_nodes))
+#            print("open nodes %i" %open_nodes[sel_node])
                     
             
             
@@ -121,7 +125,7 @@ class node(object):
         self.neighbor_downstream = neighbor_name
 
 nodes = 5
-edges = 13
+edges = 10
 
 
 g = DAG(nodes, edges)
