@@ -56,14 +56,24 @@ class DAG(object):
 
         assert (len(self.node_dict) == self.total_nodes) #check all nodes created
         
+        open_nodes=[]
         while number_edges>actual_edges:
-            #check which nodes have less dependents than potential dependents
-            #Add all those nodes to a list
-            # Pick a random entry from that list and add a node
+            for key in self.node_dict.keys():
+                #check which nodes have less dependents than potential dependents
+                if len(self.node_dict[key].dep_node)<number_nodes-(key+1):
+                    #Add all those nodes to a list
+                    open_nodes.append(key)
+                     # Pick a random entry from that list
+            sel_node=r.randint(1, len(open_nodes)+1)
+            print("open nodes %i" %open_nodes[sel_node])
+                    
             
-            add a dependent
-        if number_edge<= actual_edges:
-                remove a dependent
+            
+#            and add a node
+            
+#            add a dependent
+#        if number_edge<= actual_edges:
+#                remove a dependent
             
         #create edges
 #        for j in range(self.total_edges):
@@ -106,7 +116,7 @@ class node(object):
         self.neighbor_downstream = neighbor_name
 
 nodes = 5
-edges = 5
+edges = 13
 
 
 g = DAG(nodes, edges)
