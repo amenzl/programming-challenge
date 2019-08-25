@@ -111,7 +111,11 @@ class DAG(object):
         for key in sorted(self.node_dict.keys()):
             self.node_value_dict.update({key:self.node_dict[key].node_value})
         return(self.node_value_dict)
-        
+    
+    def select_target(self):
+        for key in self.node_value_dict.keys():
+            if len(len(self.node))
+    
     def add_node(self, name):
         self.node_dict.update({name:node(name)})
     
