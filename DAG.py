@@ -53,8 +53,8 @@ class DAG(object):
                 #Add dependent nodes to list of dep of node object
                 for j in range(num_dep_nodes):
                     self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
-                    actual_edges += num_dep_nodes
                     print('Number of edges %i' %actual_edges)
+                actual_edges += num_dep_nodes
                     
             else:
                 self.node_dict[node_order].dep_node=[]
