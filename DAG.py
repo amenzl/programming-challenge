@@ -69,7 +69,7 @@ class DAG(object):
                     #Add all those nodes to a list
                     open_nodes.append(key)
                     
-                     # Pick a random entry from that list
+            # Pick a random entry from that list
             sel_node_index = r.randint(0, len(open_nodes)-1)
             sel_node=open_nodes[sel_node_index]
             dep_node_pot = list(range(sel_node+1, self.total_nodes))
@@ -90,11 +90,11 @@ class DAG(object):
             actual_edges-=1
                 
         for key in self.node_dict.keys():
-            print('Name of node: %i' %key)
+#            print('Name of node: %i' %key)
             for node in self.node_dict.keys():
                 if key in self.node_dict[node].dep_node:
-                    print("Here are the dependent nodes of %i" %node)
-                    print(self.node_dict[node].dep_node)
+#                    print("Here are the dependent nodes of %i" %node)
+#                    print(self.node_dict[node].dep_node)
                     self.node_dict[key].find_parents(node)
 #                    print('Parents: %i' %self.node_dict[node])
     
@@ -107,17 +107,17 @@ class DAG(object):
             print('Name of node: %i' %key)
             if len(self.node_dict[key].dep_node)>0:
                 for dep in range(len(self.node_dict[key].dep_node)):
-                    print('Dependent nodes:%i' %self.node_dict[key].dep_node[dep])
+                    print('  Dependent node: %i' %self.node_dict[key].dep_node[dep])
             else: 
-                print("No dependent nodes")
+                print("  No dependent nodes")
     def print_parents(self):
         for key in self.node_dict.keys():
             print('Name of node: %i' % key)
             if(len(self.node_dict[key].parent)>0):
                 for parent in range(len(self.node_dict[key].parent)):
-                    print('Parents: %i' %self.node_dict[key].parent[parent])
+                    print('  Parent: %i' %self.node_dict[key].parent[parent])
             else: 
-                print("No parents")
+                print("  No parents")
                 
 
 
