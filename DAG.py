@@ -146,7 +146,16 @@ class DAG(object):
                     print('  Parent: %i' %self.node_dict[key].parent[parent])
             else: 
                 print("  No parents")
-                
+
+    def find_path(self, start_node, stop_node):
+        if len(self.node_dict.[start_node].dep_node) == 0:
+            print ("no path possible")
+        else:
+            for i in self.node_dict.[start_node].dep_node:
+                if i == stop_node:
+                    #save name in array somewhere to print out entire later
+                else:
+                    self.find_path(i, stop_node)
 
 
 class node(object):
