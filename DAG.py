@@ -6,6 +6,7 @@ Created on Sat Aug 24, 2019
 @author: anna
 """
 import random as r
+import numpy as np
 
 class DAG(object):
 
@@ -70,10 +71,13 @@ class DAG(object):
                     #Add all those nodes to a list
                     print("open nodes %i" %key)
                     open_nodes.append(key)
-                    print(open_nodes)
+#                    print(open_nodes)
                     actual_edges+=1
                      # Pick a random entry from that list
-#            sel_node = r.randint(0, len(open_nodes))
+            sel_node = r.randint(0, len(open_nodes)-1)
+            dep_node_pot = list(range(sel_node+1, self.total_nodes))
+            dep_node_pot_new=np.setdiff1d(dep_node_pot,self.node_dict[key].dep_node)
+            print(dep_node_pot_new)
 #            print("open nodes %i" %open_nodes[sel_node])
                     
             
