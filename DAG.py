@@ -118,16 +118,11 @@ class DAG(object):
     
     def select_target(self):
         target=[]
-        for key in self.node_value_dict.keys():
-            print('Name of node: %i' %key)
-            print(len(self.node.dict[key].dep_node))
-#            if len(self.node_dict[key].dep_node)>0:
-#                print("Yes")
-#            if len(len(self.node.dict[key].dep_node)+len(self.node.dict[key].parent))>1:
-#                print(len(self.node.dict[key].dep_node))
-#                target.append(key)
-#        index=r.randint(0, (len(target)-1))
-#        return(target)
+        for key in self.node_dict.keys():
+            if len(self.node_dict[key].dep_node)+len(self.node_dict[key].parent)>1:
+                target.append(key)
+        index=r.randint(0, (len(target)-1))
+        return(target[index])
 #        
         
     
