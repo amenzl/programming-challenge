@@ -6,6 +6,8 @@ Created on Sat Aug 24, 2019
 @author: anna
 """
 import random as r
+import numpy as np
+
 
 class DAG(object):
 
@@ -13,6 +15,7 @@ class DAG(object):
         self.total_nodes = number_nodes #create member variable to hold number of nodes
         self.total_edges = number_edges #create member variable to hold number of edges
         self.node_dict = {} #create member list of all node objects
+        self.node_value_dict={}
         self.actual_edges = 0
         
         assert (number_edges >= (number_nodes-1)) #check this is a possible graph
@@ -51,10 +54,7 @@ class DAG(object):
                 #Add dependent nodes to list of dep of node object
                 for j in range(num_dep_nodes):
                     self.node_dict[node_order].set_dep_nodes(dep_nodes[j])
-                actual_edges += num_dep_nodes
-#                print('Number of edges %i' %actual_edges)
-                
-                    
+                actual_edges += num_dep_nodes                    
             else:
                 self.node_dict[node_order].dep_node=[]
 
@@ -89,15 +89,29 @@ class DAG(object):
             self.node_dict[sel_node].dep_node.pop(del_node_index)
             actual_edges-=1
                 
+        
+    
+    def return_node_value_dict(self):
         for key in self.node_dict.keys():
-#            print('Name of node: %i' %key)
             for node in self.node_dict.keys():
                 if key in self.node_dict[node].dep_node:
-#                    print("Here are the dependent nodes of %i" %node)
-#                    print(self.node_dict[node].dep_node)
                     self.node_dict[key].find_parents(node)
-#                    print('Parents: %i' %self.node_dict[node])
-    
+                    
+        for key in sorted(self.node_dict.keys()):
+#            
+            if(len(self.node_dict[key].parent)==0):
+                self.node_dict[key].add_node_value(np.random.normal(0, 1, 1)[0])
+            else:
+                #Add all parent values
+                parent_value = 0
+                for parent in self.node_dict[key].parent:
+                    parent_value += self.node_dict[parent].node_value
+                parent_value+=np.random.normal(0, 1, 1)[0]
+                self.node_dict[key].add_node_value(parent_value)
+        for key in sorted(self.node_dict.keys()):
+            self.node_value_dict.update({key:self.node_dict[key].node_value})
+        return(self.node_value_dict)
+        
     def add_node(self, name):
         self.node_dict.update({name:node(name)})
     
@@ -127,12 +141,14 @@ class node(object):
         self.name = name
         self.dep_node = []
         self.parent=[]
-        self.node_value=None
+        self.node_value= None
 
     def set_dep_nodes(self, dep_name):
         self.dep_node.append(dep_name)
     def find_parents(self, parent):
         self.parent.append(parent)
+    def add_node_value(self, value):
+        self.node_value=value
 
     def set_neighbor_downstream(self, neighbor_name):
         self.neighbor_downstream = neighbor_name
