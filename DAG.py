@@ -137,10 +137,3 @@ class node(object):
     def set_neighbor_downstream(self, neighbor_name):
         self.neighbor_downstream = neighbor_name
 
-nodes = 5
-edges = 9
-
-
-g = DAG(nodes, edges)
-g.print_dep_nodes()
-g.print_parents()
