@@ -44,15 +44,12 @@ export_csv = df.to_csv(r'first_rand_df.csv', index = None, header=True)
 for j in range(100):
     print(j)
     list_data=[]
-    for i in range(2):
+    for i in range(1000):
         list_data.append(c.deepcopy(g.return_node_value_dict()))
-
-    data = {}
-    for d in list_data:
-        for k, v in d.items():  
-            data.setdefault(k, []).append(v)
-
-    df=pd.DataFrame.from_dict(data)
+#print(list_data)
+#print(pd.DataFrame(list_data))
+#
+    df=pd.DataFrame.from_dict(list_data)
     #Select a random target
     nodes=sorted(g.node_dict.keys())
     target=r.randint(0, len(nodes))
