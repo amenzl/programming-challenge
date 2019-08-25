@@ -153,8 +153,9 @@ class DAG(object):
         else:
             for i in self.node_dict.[start_node].dep_node:
                 if i == stop_node:
-                    #save name in array somewhere to print out entire later
+                    #add this node, then return entire path
                 else:
+                    #save name in array somewhere to print out entire later
                     self.find_path(i, stop_node)
 
 
