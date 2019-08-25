@@ -90,7 +90,11 @@ class DAG(object):
             actual_edges-=1
                 
         
-    
+        for key in self.node_dict.keys():
+                for node in self.node_dict.keys():
+                    if key in self.node_dict[node].dep_node:
+                        self.node_dict[key].find_parents(node)
+                    
     def return_node_value_dict(self):
         for key in self.node_dict.keys():
             for node in self.node_dict.keys():
@@ -113,8 +117,19 @@ class DAG(object):
         return(self.node_value_dict)
     
     def select_target(self):
+        target=[]
         for key in self.node_value_dict.keys():
-            if len(len(self.node))
+            print('Name of node: %i' %key)
+            print(len(self.node.dict[key].dep_node))
+#            if len(self.node_dict[key].dep_node)>0:
+#                print("Yes")
+#            if len(len(self.node.dict[key].dep_node)+len(self.node.dict[key].parent))>1:
+#                print(len(self.node.dict[key].dep_node))
+#                target.append(key)
+#        index=r.randint(0, (len(target)-1))
+#        return(target)
+#        
+        
     
     def add_node(self, name):
         self.node_dict.update({name:node(name)})
