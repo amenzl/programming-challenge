@@ -63,8 +63,9 @@ class DAG(object):
 
         assert (len(self.node_dict) == self.total_nodes) #check all nodes created
         
-        open_nodes=[]
+        
         while number_edges > actual_edges:
+            open_nodes=[]
             for key in self.node_dict.keys():
                 #check which nodes have less dependents than potential dependents
                 if len(self.node_dict[key].dep_node) < number_nodes-(key+1):
@@ -74,7 +75,13 @@ class DAG(object):
 #                    print(open_nodes)
                     
                      # Pick a random entry from that list
-            sel_node = r.randint(0, len(open_nodes)-1)
+            print("here is the open node list")
+            print(open_nodes)
+            sel_node_index = r.randint(0, len(open_nodes)-1)
+            print("here is the selected open node index %i" %sel_node_index)
+            sel_node=open_nodes[sel_node_index]
+            print(self.node_dict[key].dep_node(sel_node))
+            print("here is the selected open node %i" %sel_node)
             dep_node_pot = list(range(sel_node+1, self.total_nodes))
             print("here is the list of potential nodes")
             print(dep_node_pot)
