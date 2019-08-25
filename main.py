@@ -48,7 +48,7 @@ for j in range(100):
         list_data.append(c.deepcopy(g.return_node_value_dict()))
 #print(list_data)
 #print(pd.DataFrame(list_data))
-#
+    
     df=pd.DataFrame.from_dict(list_data)
     #Select a random target
     nodes=sorted(g.node_dict.keys())
