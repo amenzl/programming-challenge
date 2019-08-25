@@ -11,8 +11,8 @@ import copy as c
 import pandas as pd
 import random as r
 
-nodes = 5
-edges = 5
+nodes = 20
+edges = 20
 
 
 g = DAG(nodes, edges)
@@ -27,7 +27,7 @@ for i in range(1000):
 
 data = {}
 for d in list_data:
-    for k, v in d.items():  # d.items() in Python 3+
+    for k, v in d.items(): 
         data.setdefault(k, []).append(v)
 
 df=pd.DataFrame.from_dict(data)
@@ -46,11 +46,10 @@ for j in range(100):
     list_data=[]
     for i in range(2):
         list_data.append(c.deepcopy(g.return_node_value_dict()))
-#print(list_data)
 
     data = {}
     for d in list_data:
-        for k, v in d.items():  # d.items() in Python 3+
+        for k, v in d.items():  
             data.setdefault(k, []).append(v)
 
     df=pd.DataFrame.from_dict(data)
@@ -58,8 +57,6 @@ for j in range(100):
     nodes=sorted(g.node_dict.keys())
     target=r.randint(0, len(nodes))
     df=df.rename(columns={target: "Target"})
-    print("Here is a dataframe for value %i" %j)
-    print(df)
 
     export_csv = df.to_csv(r'rand_df'+str(j)+'.csv', index = None, header=True)
 
