@@ -12,14 +12,17 @@ import pandas as pd
 import random as r
 import time
 
-total_nodes = 20
-total_edges = 20
+total_nodes = 5
+total_edges = 5
 
 
 g = DAG(total_nodes, total_edges)
+
 g.print_dep_nodes()
 g.print_parents()
 t=g.select_target()
+
+# print(g.find_path(1,4))
 
 list_data=[]
 for i in range(1000):
@@ -72,7 +75,7 @@ for j in range(100):
 
     
 
-
+"""
 
 
 
