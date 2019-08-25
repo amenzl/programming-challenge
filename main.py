@@ -51,20 +51,20 @@ for j in range(100):
         list_data.append(c.deepcopy(g.return_node_value_dict()))
 #print(list_data)
 #print(pd.DataFrame(list_data))
-    print("took %f s to run graph" % time.time()-graph_time)
+    print("took {} s to run graph".format(time.time()-graph_time))
     df_time = time.time()
     df=pd.DataFrame.from_dict(list_data)
     #Select a random target
     nodes=sorted(g.node_dict.keys())
     target=r.randint(0, len(nodes))
     df=df.rename(columns={target: "Target"})
-    print("took %f s to create df" % time.time()-df_time)
+    print("took {} s to create df".format(time.time()-df_time))
 
     export_time = time.time()
     export_csv = df.to_csv(r'rand_df'+str(j)+'.csv', index = None, header=True)
-    print("took %f to export" % time.time()-export_time)
+    print("took {} to export".format(time.time()-export_time))
 
-    print("j=%i took %f s total" % (j, time.time()-loop_time))
+    print("took {} s total".format(time.time()-loop_time))
     
 
     
